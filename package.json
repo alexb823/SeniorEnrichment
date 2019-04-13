@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "DATABASE_URL=postgres://localhost/campuses_students_db nodemon server/db.js"
+    "postinstall": "webpack",
+    "start": "node server",
+    "webpack": "webpack",
+    "webpack:dev": "npm run webpack -- --mode=development --watch",
+    "start:dev": "npm run webpack:dev & DATABASE_URL=postgres://localhost/campuses_students_db nodemon server --ignore src/ --ignore dist/"
   },
   "keywords": [],
   "author": "",

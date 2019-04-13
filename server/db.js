@@ -64,8 +64,8 @@ const Student = db.define('student', {
   gpa: {
     type: Sequelize.FLOAT,
     validate: {
-      min: 0,
-      max: 4,
+      min: 0.0,
+      max: 4.0,
     },
   },
 });
@@ -111,7 +111,7 @@ const syncAndSeed = () => {
             lastName: faker.name.lastName(),
             email: faker.internet.email(),
             imageUrl: faker.internet.avatar(),
-            gpa: parseFloat(Math.random() * 4).toFixed(1),
+            gpa: parseFloat((Math.random() * 4).toFixed(1)),
             campusId: campus.id,
           });
           ++count;
@@ -122,4 +122,4 @@ const syncAndSeed = () => {
     .catch(err => console.error(err));
 };
 
-syncAndSeed();
+module.exports = {db, Campus, Student, syncAndSeed};
