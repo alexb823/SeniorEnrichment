@@ -8,23 +8,29 @@
   height: 40vh;
   background-position: center;
   background-size: cover;
-
 }
 
-/* .fade
-{
-        opacity:0;
-}
-.fade:hover
-{
-        opacity:1;
+.main-image:hover {
+  opacity: 0.85;
 }
 
-div.fade {
-	height: 60vh;
+.avatar-small {
+  width: 50px;
 }
 
-div.fade h3 {
-	line-height: 60vh;
-	vertical-align: middle;
-} */
+.fade-in-text {
+  opacity: 0;
+}
+.fade-in-text:hover {
+  opacity: 1;
+}
+
+div.fade-in-text {
+  height: 40vh;
+  vertical-align: middle;
+}
+
+div.fade-in-text .display-4 {
+  line-height: 40vh;
+  vertical-align: middle;
+}

@@ -17,7 +17,9 @@ const Campuses = ({ campuses }) => {
                 className="main-image m-1"
                 style={{ backgroundImage: `url(${campus.imageUrl})` }}
               >
-                <h2 className="display-4 text-white ml-4">{campus.name}</h2>
+              <div className="fade-in-text align-middle">
+                <h1 className="display-4 text-white text-center">{campus.name}</h1>
+              </div>
               </div>
             </Col>
           ))}

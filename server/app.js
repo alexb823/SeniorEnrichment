@@ -9,8 +9,8 @@ app.use(express.static(path.join(__dirname, '..', 'dist')));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/', (req, res, next) => {
-  res.sendFile(path.join(__dirname, '..', 'src', 'index.html'))
-})
+  res.sendFile(path.join(__dirname, '..', 'src', 'index.html'));
+});
 
 app.get('/api/campuses', (req, res, next) => {
   Campus.findAll()
@@ -22,6 +22,30 @@ app.get('/api/students', (req, res, next) => {
   Student.findAll()
     .then(students => res.send(students))
     .catch(next);
+});
+
+app.get('/api/campuses/:id', (req, res, next) => {
+  Campus.findByPk(req.params.id, {
+    include: [
+      {
+        model: Student,
+        where: {
+          campusId: req.params.id
+        }
+      }
+    ]
+  })
+  .then(campus => res.send(campus))
+})
+
+app.get('/api/students/:id', (req, res, next) => {
+  Student.findByPk(req.params.id, {
+    include: [
+      {
+        model: Campus,
+      },
+    ],
+  }).then(student => res.send(student));
 });
 
 //handle 404
