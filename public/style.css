@@ -1,0 +1,30 @@
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.main-image {
+  height: 40vh;
+  background-position: center;
+  background-size: cover;
+
+}
+
+/* .fade
+{
+        opacity:0;
+}
+.fade:hover
+{
+        opacity:1;
+}
+
+div.fade {
+	height: 60vh;
+}
+
+div.fade h3 {
+	line-height: 60vh;
+	vertical-align: middle;
+} */

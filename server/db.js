@@ -54,12 +54,7 @@ const Student = db.define('student', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: path.join(
-      __dirname,
-      '..',
-      'public',
-      'user-graduate-solid.svg'
-    ),
+    defaultValue: 'user-graduate-solid.svg',
   },
   gpa: {
     type: Sequelize.FLOAT,
@@ -75,32 +70,22 @@ Campus.hasMany(Student);
 Student.belongsTo(Campus);
 
 //Syncing and seeding the database
+const campusNames = ['Luna', 'Terra', 'Mars', 'Titan'];
+
 const syncAndSeed = () => {
   return db
     .sync({ force: true })
     .then(() =>
-      Promise.all([
-        Campus.create({
-          name: 'Luna',
-          address: `${faker.address.streetAddress()}, Moon`,
-          description: faker.lorem.paragraphs(4),
-        }),
-        Campus.create({
-          name: 'Terra',
-          address: `${faker.address.streetAddress()}, Earth`,
-          description: faker.lorem.paragraphs(4),
-        }),
-        Campus.create({
-          name: 'Mars',
-          address: `${faker.address.streetAddress()}, Mars`,
-          description: faker.lorem.paragraphs(4),
-        }),
-        Campus.create({
-          name: 'Titan',
-          address: `${faker.address.streetAddress()}, Titan`,
-          description: faker.lorem.paragraphs(4),
-        }),
-      ])
+      Promise.all(
+        campusNames.map(campusName => {
+          return Campus.create({
+            name: campusName,
+            imageUrl: `${campusName}.jpg`,
+            address: `${faker.address.streetAddress()}, ${campusName}`,
+            description: faker.lorem.paragraphs(4),
+          });
+        })
+      )
     )
     .then(campuses => {
       campuses.forEach(campus => {
@@ -122,4 +107,32 @@ const syncAndSeed = () => {
     .catch(err => console.error(err));
 };
 
-module.exports = {db, Campus, Student, syncAndSeed};
+module.exports = { Campus, Student, syncAndSeed };
+
+// Promise.all([
+//   Campus.create({
+//     name: 'Luna',
+//     imageUrl: 'Moon.jpg',
+//     address: `${faker.address.streetAddress()}, Moon`,
+//     description: faker.lorem.paragraphs(4),
+//   }),
+//   Campus.create({
+//     name: 'Terra',
+//     imageUrl: 'Earth.jpg',
+//     address: `${faker.address.streetAddress()}, Earth`,
+//     description: faker.lorem.paragraphs(4),
+//   }),
+//   Campus.create({
+//     name: 'Mars',
+//     imageUrl: 'Mars.jpg',
+//     address: `${faker.address.streetAddress()}, Mars`,
+//     description: faker.lorem.paragraphs(4),
+//   }),
+//   Campus.create({
+//     name: 'Titan',
+//     imageUrl: 'Titan.jpg',
+//     address: `${faker.address.streetAddress()}, Titan`,
+//     description: faker.lorem.paragraphs(4),
+//   }),
+// ])
+// )
