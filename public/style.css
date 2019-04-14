@@ -10,6 +10,12 @@
   background-size: cover;
 }
 
+.jumbo-image {
+  height: 40vh;
+  background-position: center;
+  background-size: cover;
+}
+
 .main-image:hover {
   opacity: 0.9;
 }

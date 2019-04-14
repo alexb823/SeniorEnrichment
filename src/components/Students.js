@@ -2,21 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ListGroup, Image } from 'react-bootstrap';
+import StudentList from './StudentList';
 
 const Students = ({ students }) => {
   return (
-    <ListGroup>
-      {students.map(student => (
-        <ListGroup.Item key={student.id}>
-          <Image
-            src={student.imageUrl}
-            roundedCircle
-            className="avatar-small mr-2"
-          />
-          {student.lastName} {student.firstName}
-        </ListGroup.Item>
-      ))}
-    </ListGroup>
+    <StudentList students={students} />
   );
 };
 

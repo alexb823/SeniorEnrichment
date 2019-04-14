@@ -7,6 +7,7 @@ import { fetchCampuses, fetchStudents } from '../store';
 import Students from './Students';
 import Campuses from './Campuses';
 import Navigation from './Navigation';
+import SingleCampus from './SingleCampus';
 
 class App extends Component {
   componentDidMount() {
@@ -17,8 +18,9 @@ class App extends Component {
       <Router>
         <Route component={Navigation} />
         <Container>
-          <Route path="/campuses" component={Campuses} />
-          <Route path="/students" component={Students} />
+          <Route exact path="/campuses" component={Campuses} />
+          <Route exact path="/students" component={Students} />
+          <Route path="/campuses/:id" component={SingleCampus} />
         </Container>
       </Router>
     );

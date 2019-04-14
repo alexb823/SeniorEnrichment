@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const Campuses = ({ campuses }) => {
-  console.log(campuses);
   if (!campuses.length) {
     return null;
   } else {
