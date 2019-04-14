@@ -11,7 +11,11 @@
 }
 
 .main-image:hover {
-  opacity: 0.85;
+  opacity: 0.9;
+}
+
+.main-image a {
+  text-decoration: none;
 }
 
 .avatar-small {
@@ -27,7 +31,7 @@
 
 div.fade-in-text {
   height: 40vh;
-  vertical-align: middle;
+  text-decoration: none;
 }
 
 div.fade-in-text .display-4 {
