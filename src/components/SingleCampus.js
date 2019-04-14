@@ -33,17 +33,17 @@ const SingleCampus = ({ campus, students }) => {
 };
 
 const findCampus = (campuses, campusId) => {
-  return campuses.find(campus => campus.id === campusId * 1);
+  return campuses.find(campus => campus.id === campusId);
 };
 
 const filterStudents = (students, campusId) => {
-  return students.filter(student => student.campusId === campusId * 1);
+  return students.filter(student => student.campusId === campusId);
 };
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    campus: findCampus(state.campuses, ownProps.match.params.id),
-    students: filterStudents(state.students, ownProps.match.params.id),
+    campus: findCampus(state.campuses, ownProps.match.params.id*1),
+    students: filterStudents(state.students, ownProps.match.params.id*1),
   };
 };
 

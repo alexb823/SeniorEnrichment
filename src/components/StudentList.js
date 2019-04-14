@@ -6,7 +6,7 @@ const StudentList = ({ students }) => {
   return (
     <ListGroup>
       {students.map(student => (
-        <ListGroup.Item key={student.id}>
+        <ListGroup.Item key={student.id} action href={`#/students/${student.id}`}>
           <Image
             src={student.imageUrl}
             roundedCircle
