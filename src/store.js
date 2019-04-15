@@ -52,7 +52,7 @@ export const fetchCampuses = () => {
       .get('/api/campuses')
       .then(response => response.data)
       .then(campuses => dispatch(gotCampuses(campuses)))
-          // .then(() => console.log(store.getState()));
+    // .then(() => console.log(store.getState()));
 
   };
 };
@@ -60,13 +60,21 @@ export const fetchCampuses = () => {
 export const fetchStudents = () => {
   return dispatch => {
     return axios
-    .get('/api/students')
-    .then(response => response.data)
-    .then(students => dispatch(gotStudents(students)))
+      .get('/api/students')
+      .then(response => response.data)
+      .then(students => dispatch(gotStudents(students)))
     // .then(() => console.log(store.getState()));
 
   };
 };
+
+export const createCampus = (campus) => {
+  return dispatch => {
+    return axios.post('/api/campuses/create', campus)
+      .then(response => console.log(response.data))
+      .then(() => dispatch(fetchCampuses()))
+  }
+}
 
 const store = createStore(reducer, applyMiddleware(thunk));
 export default store;

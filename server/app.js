@@ -36,6 +36,7 @@ app.get('/api/campuses/:id', (req, res, next) => {
     ]
   })
   .then(campus => res.send(campus))
+  .catch(next)
 })
 
 app.get('/api/students/:id', (req, res, next) => {
@@ -45,17 +46,21 @@ app.get('/api/students/:id', (req, res, next) => {
         model: Campus,
       },
     ],
-  }).then(student => res.send(student));
+  })
+  .then(student => res.send(student))
+  .catch(next)
 });
 
 app.post('/api/campuses/create', (req, res, next) => {
   Campus.create(req.body)
   .then(campus => res.send(campus))
+  .catch(next)
 })
 
 app.post('/api/students/create', (req, res, next) => {
   Student.create(req.body)
   .then(student => res.send(student))
+  .catch(next)
 })
 
 //handle 404

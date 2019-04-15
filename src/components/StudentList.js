@@ -4,7 +4,7 @@ import { ListGroup, Image } from 'react-bootstrap';
 
 const StudentList = ({ students }) => {
   return (
-    <ListGroup>
+    <ListGroup className="mb-3">
       {students.map(student => (
         <ListGroup.Item
           key={student.id}
@@ -16,7 +16,7 @@ const StudentList = ({ students }) => {
             roundedCircle
             className="avatar-small mr-3"
           />
-          {student.lastName} {student.firstName}
+          <span>{student.lastName} {student.firstName}</span>
         </ListGroup.Item>
       ))}
     </ListGroup>

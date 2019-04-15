@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { fetchCampuses, fetchStudents } from '../store';
 import Students from './Students';
@@ -20,10 +20,12 @@ class App extends Component {
       <Router>
         <Route component={Navigation} />
         <Container>
-          <Switch>
+          
+          <Route exact path="/" render={()=> <Redirect to="/campuses" /> }/>
           <Route exact path="/campuses" component={Campuses} />
           <Route exact path="/students" component={Students} />
-          <Route exact path="/campuses/create" component={AddCampus} />
+          <Switch>
+          <Route exact path="/campuses/add" component={AddCampus} />
           <Route exact path="/campuses/:id" component={SingleCampus} />
           <Route exact path="/students/:id" component={SingleStudent} />
           </Switch>

@@ -4,6 +4,13 @@ const path = require('path');
 
 const db = new Sequelize(process.env.DATABASE_URL, { logging: false });
 
+// // For cloud9 db
+// const db = new Sequelize('campuses_students_db', 'ubuntu', 'password', {
+//   host: 'localhost',
+//   dialect: 'postgres',
+//   logging: false,
+// });
+
 //models
 const Campus = db.define('campus', {
   name: {
@@ -15,7 +22,7 @@ const Campus = db.define('campus', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: path.join(__dirname, '..', 'public', 'default_campus.jpg'),
+    defaultValue: 'default_campus.jpg',
   },
   address: {
     type: Sequelize.STRING,
@@ -27,6 +34,12 @@ const Campus = db.define('campus', {
   description: {
     type: Sequelize.TEXT,
   },
+}, {
+  hooks: {
+    beforeSave: (campus) => {
+      if(!campus.imageUrl) campus.imageUrl = 'default_campus.jpg';
+    }
+  }
 });
 
 const Student = db.define('student', {
@@ -82,7 +95,7 @@ const syncAndSeed = () => {
             name: campusName,
             imageUrl: `${campusName}.jpg`,
             address: `${faker.address.streetAddress()}, ${campusName}`,
-            description: faker.lorem.paragraphs(4),
+            description: faker.lorem.paragraphs(3),
           });
         })
       )
@@ -109,30 +122,3 @@ const syncAndSeed = () => {
 
 module.exports = { Campus, Student, syncAndSeed };
 
-// Promise.all([
-//   Campus.create({
-//     name: 'Luna',
-//     imageUrl: 'Moon.jpg',
-//     address: `${faker.address.streetAddress()}, Moon`,
-//     description: faker.lorem.paragraphs(4),
-//   }),
-//   Campus.create({
-//     name: 'Terra',
-//     imageUrl: 'Earth.jpg',
-//     address: `${faker.address.streetAddress()}, Earth`,
-//     description: faker.lorem.paragraphs(4),
-//   }),
-//   Campus.create({
-//     name: 'Mars',
-//     imageUrl: 'Mars.jpg',
-//     address: `${faker.address.streetAddress()}, Mars`,
-//     description: faker.lorem.paragraphs(4),
-//   }),
-//   Campus.create({
-//     name: 'Titan',
-//     imageUrl: 'Titan.jpg',
-//     address: `${faker.address.streetAddress()}, Titan`,
-//     description: faker.lorem.paragraphs(4),
-//   }),
-// ])
-// )
