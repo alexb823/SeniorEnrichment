@@ -57,7 +57,6 @@ export const fetchCampuses = () => {
   };
 };
 
-
 export const fetchStudents = () => {
   return dispatch => {
     return axios

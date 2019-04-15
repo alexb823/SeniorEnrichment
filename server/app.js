@@ -48,6 +48,16 @@ app.get('/api/students/:id', (req, res, next) => {
   }).then(student => res.send(student));
 });
 
+app.post('/api/campuses/create', (req, res, next) => {
+  Campus.create(req.body)
+  .then(campus => res.send(campus))
+})
+
+app.post('/api/students/create', (req, res, next) => {
+  Student.create(req.body)
+  .then(student => res.send(student))
+})
+
 //handle 404
 app.use((req, res, next) => {
   const err = new Error('Not Found!');
