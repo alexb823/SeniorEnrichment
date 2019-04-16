@@ -1,29 +1,35 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Image } from 'react-bootstrap';
+import { Image, Card, Button, Row, Col } from 'react-bootstrap';
 
 const SingleStudent = ({ student, campus }) => {
-  console.log(student);
-  console.log(campus);
+  // console.log(student);
+  // console.log(campus);
   if (!student) {
     return 'Loading...';
   } else {
     return (
-      <div>
-        {student.firstName}
-        {student.lastName}
-        {student.gpa}
-        {student.email}
-
-        <Image src={student.imageUrl} />
-
+      <Card>
+      <Card.Header>Student ID: {student.id}</Card.Header>
+      <Card.Body>
+      <Row>
+      <Col>
+      <Image src={student.imageUrl} rounded style={{height: '140px'}} />
+      </Col>
+      <Col>
+        <Card.Title>{student.firstName} {student.lastName}</Card.Title>
+        <Card.Text>{student.email}</Card.Text>
+        <Card.Text>GPA: {student.gpa}</Card.Text>
         {campus ? (
-          <Link to={`/campuses/${campus.id}`}>{campus.name}</Link>
-        ) : (
-          'no campus'
-        )}
-      </div>
+              <Card.Link href={`#/campuses/${campus.id}`}>{campus.name}</Card.Link>
+            ) : (
+              'no campus'
+            )}
+            </Col>
+            </Row>
+      </Card.Body>
+    </Card>
     );
   }
 };

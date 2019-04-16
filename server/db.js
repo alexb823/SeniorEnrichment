@@ -4,7 +4,7 @@ const path = require('path');
 
 const db = new Sequelize(process.env.DATABASE_URL, { logging: false });
 
-// // For cloud9 db
+// For cloud9 db
 // const db = new Sequelize('campuses_students_db', 'ubuntu', 'password', {
 //   host: 'localhost',
 //   dialect: 'postgres',
@@ -73,7 +73,10 @@ const Student = db.define('student', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: 'user-graduate-solid.svg',
+    defaultValue: 'https://images.dailykos.com/images/479822/story_image/unnamed.jpg?1512326578',
+    validate: {
+      isUrl: true,
+    }
   },
   gpa: {
     type: Sequelize.DECIMAL(10,1),
@@ -85,7 +88,7 @@ const Student = db.define('student', {
 }, {
   hooks: {
     beforeValidate: (student) => {
-      if(!student.imageUrl) student.imageUrl = 'user-graduate-solid.svg';
+      if(!student.imageUrl) student.imageUrl = 'https://images.dailykos.com/images/479822/story_image/unnamed.jpg?1512326578';
       if(!student.gpa) student.gpa = null;
       if(student.campusId === '--None--') student.campusId = null;
     }
