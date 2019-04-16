@@ -64,17 +64,17 @@ app.post('/api/students/create', (req, res, next) => {
 });
 
 app.delete('/api/students/:id', (req, res, next) => {
-  Student.destroy({where: {id: req.params.id}})
-  .then(() => res.sendStatus(204))
-  .catch(next)
-})
+  Student.destroy({ where: { id: req.params.id } })
+    .then(() => res.sendStatus(204))
+    .catch(next);
+});
 
 app.delete('/api/campuses/:id', (req, res, next) => {
-  Student.update({campusId: null}, {where: {campusId: req.params.id}})
-  .then(() => Campus.destroy({where: {id: req.params.id}}))
-  .then(() => res.sendStatus(204))
-  .catch(next)
-})
+  Student.update({ campusId: null }, { where: { campusId: req.params.id } })
+    .then(() => Campus.destroy({ where: { id: req.params.id } }))
+    .then(() => res.sendStatus(204))
+    .catch(next);
+});
 
 //handle 404
 app.use((req, res, next) => {

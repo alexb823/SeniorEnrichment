@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Image, Card, Button, Row, Col } from 'react-bootstrap';
+import { Image, Card, Row, Col } from 'react-bootstrap';
 
 const SingleStudent = ({ student, campus }) => {
   // console.log(student);
@@ -11,25 +10,33 @@ const SingleStudent = ({ student, campus }) => {
   } else {
     return (
       <Card>
-      <Card.Header>Student ID: {student.id}</Card.Header>
-      <Card.Body>
-      <Row>
-      <Col>
-      <Image src={student.imageUrl} rounded style={{height: '140px'}} />
-      </Col>
-      <Col>
-        <Card.Title>{student.firstName} {student.lastName}</Card.Title>
-        <Card.Text>{student.email}</Card.Text>
-        <Card.Text>GPA: {student.gpa}</Card.Text>
-        {campus ? (
-              <Card.Link href={`#/campuses/${campus.id}`}>{campus.name}</Card.Link>
-            ) : (
-              'no campus'
-            )}
+        <Card.Header>Student ID: {student.id}</Card.Header>
+        <Card.Body>
+          <Row>
+            <Col>
+              <Image
+                src={student.imageUrl}
+                rounded
+                style={{ height: '140px' }}
+              />
             </Col>
-            </Row>
-      </Card.Body>
-    </Card>
+            <Col>
+              <Card.Title>
+                {student.firstName} {student.lastName}
+              </Card.Title>
+              <Card.Text>{student.email}</Card.Text>
+              <Card.Text>GPA: {student.gpa}</Card.Text>
+              {campus ? (
+                <Card.Link href={`#/campuses/${campus.id}`}>
+                  {campus.name}
+                </Card.Link>
+              ) : (
+                'no campus'
+              )}
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
     );
   }
 };

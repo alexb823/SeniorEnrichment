@@ -13,8 +13,12 @@ const Campuses = ({ campuses }) => {
     return (
       <Container>
         <Row className="mb-3">
-          <Button variant="outline-dark" className="ml-auto" href="#/campuses/add">
-            New Campus <FontAwesomeIcon icon={faPlus}  className="ml-1"/>
+          <Button
+            variant="outline-dark"
+            className="ml-auto"
+            href="#/campuses/add"
+          >
+            New Campus <FontAwesomeIcon icon={faPlus} className="ml-1" />
           </Button>
         </Row>
 

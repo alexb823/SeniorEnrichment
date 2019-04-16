@@ -5,8 +5,7 @@ import { Jumbotron, Row, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 import StudentList from './StudentList';
-import {deleteCampus} from '../store';
-
+import { deleteCampus } from '../store';
 
 const SingleCampus = ({ campus, students, history, deleteCampus }) => {
   if (!campus) {
@@ -14,12 +13,12 @@ const SingleCampus = ({ campus, students, history, deleteCampus }) => {
   } else {
     const description = campus.description.split('\n \r');
     const handleOnDelete = () => {
-      console.log('clicked')
+      console.log('clicked');
       deleteCampus(campus.id)
-      .then(()=> history.push('/campuses'))
-      .catch(ex => console.error(ex.respose.data))
-    }
-    
+        .then(() => history.push('/campuses'))
+        .catch(ex => console.error(ex.respose.data));
+    };
+
     return (
       <Fragment>
         <Jumbotron
@@ -29,10 +28,15 @@ const SingleCampus = ({ campus, students, history, deleteCampus }) => {
           <h1 className="display-3 text-white">{campus.name} Campus</h1>
           <p className="text-white lead">{description[0]}</p>
         </Jumbotron>
-        
+
         <Row className="mb-3">
-          <Button variant="outline-danger" className="ml-auto mr-3" onClick={handleOnDelete}>
-            Delete Campus <FontAwesomeIcon icon={faMinusCircle}  className="ml-1"/>
+          <Button
+            variant="outline-danger"
+            className="ml-auto mr-3"
+            onClick={handleOnDelete}
+          >
+            Delete Campus{' '}
+            <FontAwesomeIcon icon={faMinusCircle} className="ml-1" />
           </Button>
         </Row>
 
@@ -49,7 +53,7 @@ const SingleCampus = ({ campus, students, history, deleteCampus }) => {
   }
 };
 
-//helper function for mapmapStateToProps
+//helper function for mapStateToProps
 const findCampusAndStudents = (campuses, students, campusId) => {
   const data = {};
   data.campus = campuses.find(campus => campus.id === campusId);
@@ -64,13 +68,16 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteCampus: (id)=> dispatch(deleteCampus(id))
-  }
-}
+    deleteCampus: id => dispatch(deleteCampus(id)),
+  };
+};
 
 SingleCampus.propTypes = {
   campus: PropTypes.object,
   students: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleCampus);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleCampus);
