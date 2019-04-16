@@ -19,7 +19,7 @@ app.get('/api/campuses', (req, res, next) => {
 });
 
 app.get('/api/students', (req, res, next) => {
-  Student.findAll()
+  Student.findAll({ order: [['lastName', 'ASC']] })
     .then(students => res.send(students))
     .catch(next);
 });
@@ -30,14 +30,14 @@ app.get('/api/campuses/:id', (req, res, next) => {
       {
         model: Student,
         where: {
-          campusId: req.params.id
-        }
-      }
-    ]
+          campusId: req.params.id,
+        },
+      },
+    ],
   })
-  .then(campus => res.send(campus))
-  .catch(next)
-})
+    .then(campus => res.send(campus))
+    .catch(next);
+});
 
 app.get('/api/students/:id', (req, res, next) => {
   Student.findByPk(req.params.id, {
@@ -47,21 +47,21 @@ app.get('/api/students/:id', (req, res, next) => {
       },
     ],
   })
-  .then(student => res.send(student))
-  .catch(next)
+    .then(student => res.send(student))
+    .catch(next);
 });
 
 app.post('/api/campuses/create', (req, res, next) => {
   Campus.create(req.body)
-  .then(campus => res.send(campus))
-  .catch(next)
-})
+    .then(campus => res.send(campus))
+    .catch(next);
+});
 
 app.post('/api/students/create', (req, res, next) => {
   Student.create(req.body)
-  .then(student => res.send(student))
-  .catch(next)
-})
+    .then(student => res.send(student))
+    .catch(next);
+});
 
 //handle 404
 app.use((req, res, next) => {

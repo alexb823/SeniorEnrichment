@@ -51,9 +51,7 @@ export const fetchCampuses = () => {
     return axios
       .get('/api/campuses')
       .then(response => response.data)
-      .then(campuses => dispatch(gotCampuses(campuses)))
-    // .then(() => console.log(store.getState()));
-
+      .then(campuses => dispatch(gotCampuses(campuses)));
   };
 };
 
@@ -62,19 +60,25 @@ export const fetchStudents = () => {
     return axios
       .get('/api/students')
       .then(response => response.data)
-      .then(students => dispatch(gotStudents(students)))
-    // .then(() => console.log(store.getState()));
-
+      .then(students => dispatch(gotStudents(students)));
   };
 };
 
-export const createCampus = (campus) => {
+export const createCampus = campus => {
   return dispatch => {
-    return axios.post('/api/campuses/create', campus)
-      .then(response => console.log(response.data))
-      .then(() => dispatch(fetchCampuses()))
-  }
-}
+    return axios
+      .post('/api/campuses/create', campus)
+      .then(() => dispatch(fetchCampuses()));
+  };
+};
+
+export const createStudent = student => {
+  return dispatch => {
+    return axios
+      .post('/api/students/create', student)
+      .then(() => dispatch(fetchStudents()));
+  };
+};
 
 const store = createStore(reducer, applyMiddleware(thunk));
 export default store;

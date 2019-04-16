@@ -13,9 +13,11 @@ const SingleStudent = ({ student, campus }) => {
       <div>
         {student.firstName}
         {student.lastName}
+        {student.gpa}
         {student.email}
-        {student.gra}
+
         <Image src={student.imageUrl} />
+
         {campus ? (
           <Link to={`/campuses/${campus.id}`}>{campus.name}</Link>
         ) : (

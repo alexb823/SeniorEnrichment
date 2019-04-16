@@ -16,8 +16,9 @@ const Campus = db.define('campus', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: {msg: 'Campus name must be unique'},
     validate: {
-      notEmpty: true,
+      notEmpty:{msg: 'Campus name can\'t be empty'},
     },
   },
   imageUrl: {
@@ -27,8 +28,9 @@ const Campus = db.define('campus', {
   address: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: {msg: 'Campus address must be unique'},
     validate: {
-      notEmpty: true,
+      notEmpty: {msg: 'Campus address can\'t be empty'},
     },
   },
   description: {
@@ -60,6 +62,7 @@ const Student = db.define('student', {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: {msg: 'Email must be unique'},
     validate: {
       notEmpty: true,
       isEmail: true,
