@@ -4,7 +4,6 @@ const path = require('path');
 
 const db = new Sequelize(process.env.DATABASE_URL, { logging: false });
 
-
 // // For cloud9 db
 // const db = new Sequelize('campuses_students_db', 'ubuntu', 'password', {
 //   host: 'localhost',

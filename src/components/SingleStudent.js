@@ -28,6 +28,7 @@ const SingleStudent = ({ student, campus }) => {
   }
 };
 
+//helper function for mapmapStateToProps
 const findStudentAndCampus = (students, campuses, studentId) => {
   const studentInfo = {};
   studentInfo.student = students.find(student => student.id === studentId);
