@@ -27,7 +27,6 @@ class AddCampus extends Component {
     event.preventDefault();
     const { history, createCampus } = this.props;
     const { campus } = this.state;
-
     createCampus(campus)
       .then(() => history.push('/campuses'))
       .catch(ex => {
@@ -44,7 +43,7 @@ class AddCampus extends Component {
       <Form onSubmit={handleSubmit}>
         {error && (
           <Alert variant="danger">
-            <Alert.Heading>You got an error!</Alert.Heading>
+            <Alert.Heading>Please correct the form</Alert.Heading>
             {error.split(',').map(err => (
               <p key={err}>{err}</p>
             ))}

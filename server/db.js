@@ -4,6 +4,7 @@ const path = require('path');
 
 const db = new Sequelize(process.env.DATABASE_URL, { logging: false });
 
+
 // // For cloud9 db
 // const db = new Sequelize('campuses_students_db', 'ubuntu', 'password', {
 //   host: 'localhost',
@@ -23,7 +24,10 @@ const Campus = db.define('campus', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: 'default_campus.jpg',
+    defaultValue: 'https://storywarren.com/wp-content/uploads/2016/09/space-1.jpg',
+    validate: {
+      isUrl: true,
+    }
   },
   address: {
     type: Sequelize.STRING,
@@ -38,8 +42,8 @@ const Campus = db.define('campus', {
   },
 }, {
   hooks: {
-    beforeSave: (campus) => {
-      if(!campus.imageUrl) campus.imageUrl = 'default_campus.jpg';
+    beforeValidate: (campus) => {
+      if(!campus.imageUrl) campus.imageUrl = 'https://storywarren.com/wp-content/uploads/2016/09/space-1.jpg';
     }
   }
 });
@@ -73,12 +77,20 @@ const Student = db.define('student', {
     defaultValue: 'user-graduate-solid.svg',
   },
   gpa: {
-    type: Sequelize.FLOAT,
+    type: Sequelize.DECIMAL(10,1),
     validate: {
       min: 0.0,
       max: 4.0,
     },
   },
+}, {
+  hooks: {
+    beforeValidate: (student) => {
+      if(!student.imageUrl) student.imageUrl = 'user-graduate-solid.svg';
+      if(!student.gpa) student.gpa = null;
+      if(student.campusId === '--None--') student.campusId = null;
+    }
+  }
 });
 
 //Associations
@@ -112,7 +124,7 @@ const syncAndSeed = () => {
             lastName: faker.name.lastName(),
             email: faker.internet.email(),
             imageUrl: faker.internet.avatar(),
-            gpa: parseFloat((Math.random() * 4).toFixed(1)),
+            gpa: Math.random() * 4,
             campusId: campus.id,
           });
           ++count;

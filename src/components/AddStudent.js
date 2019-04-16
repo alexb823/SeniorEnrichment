@@ -4,18 +4,18 @@ import { Form, Col, Button, Alert } from 'react-bootstrap';
 import { createStudent } from '../store';
 
 class AddStudent extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       student: {
         firstName: '',
         lastName: '',
         email: '',
         gpa: '',
-        campusId: '',
-        campusName: '',
+        campusId: '--None--',
         imageUrl: '',
       },
+      campuses: this.props.campuses,
       error: '',
     };
   }
@@ -24,8 +24,16 @@ class AddStudent extends Component {
     const { student } = this.state;
     student[target.name] = target.value;
     this.setState({ student });
-    console.log(this.state.student);
   };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    const { history, createStudent } = this.props;
+    const { student } = this.state;
+    createStudent(student)
+      .then(() => history.push('/students'))
+      .catch(ex => this.setState({ error: ex.response.data }))
+  }
 
   render() {
     const {
@@ -34,14 +42,23 @@ class AddStudent extends Component {
       email,
       gpa,
       campusId,
-      campusName,
       imageUrl,
     } = this.state.student;
 
-    const { handleChange } = this;
+    const { campuses, error } = this.state;
+
+    const { handleChange, handleSubmit } = this;
+
+    console.log(this.state)
 
     return (
-      <Form>
+      <Form onSubmit={handleSubmit}>
+      {error && (
+      <Alert variant="danger">
+      <Alert.Heading>Please correct the form</Alert.Heading>
+      {error.split(',').map(err => <p key={err}>{err}</p>)}
+      </Alert>)}
+      
         <Form.Row>
           <Form.Group as={Col}>
             <Form.Label>First Name</Form.Label>
@@ -88,7 +105,7 @@ class AddStudent extends Component {
         </Form.Group>
 
         <Form.Row>
-          <Form.Group>
+          <Form.Group as={Col} xs={3}>
             <Form.Label>GPA</Form.Label>
             <Form.Control
               type="text"
@@ -102,12 +119,12 @@ class AddStudent extends Component {
             <Form.Label>Campus</Form.Label>
             <Form.Control
               as="select"
-              name="campusName"
-              value={campusName}
+              name="campusId"
+              value={campusId}
               onChange={handleChange}
             >
-              <option>Choose...</option>
-              <option>...</option>
+              <option value='--None--'>--None--</option>
+              {campuses.map(campus => <option key={campus.id} value={campus.id}>{campus.name}</option>)}
             </Form.Control>
           </Form.Group>
         </Form.Row>
