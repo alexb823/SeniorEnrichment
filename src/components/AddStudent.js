@@ -26,6 +26,14 @@ class AddStudent extends Component {
     this.setState({ student });
   };
 
+  componentDidUpdate = (prevProps) => {
+    console.log(this.props);
+    console.log(prevProps);
+    if(this.props.campuses.length && !prevProps.campuses.length) {
+      this.setState({campuses: this.props.campuses})
+    }
+  }
+
   handleSubmit = event => {
     event.preventDefault();
     const { history, createStudent } = this.props;
@@ -49,8 +57,6 @@ class AddStudent extends Component {
 
     const { handleChange, handleSubmit } = this;
 
-    console.log(this.state)
-
     return (
       <Form onSubmit={handleSubmit}>
       {error && (
@@ -58,7 +64,7 @@ class AddStudent extends Component {
       <Alert.Heading>Please correct the form</Alert.Heading>
       {error.split(',').map(err => <p key={err}>{err}</p>)}
       </Alert>)}
-      
+
         <Form.Row>
           <Form.Group as={Col}>
             <Form.Label>First Name</Form.Label>

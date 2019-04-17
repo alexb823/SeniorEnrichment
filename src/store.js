@@ -80,6 +80,13 @@ export const createStudent = student => {
   };
 };
 
+export const updatedCampus = (id, campus) => {
+  return dispatch => {
+    return axios.put(`/api/campuses/${id}`, campus)
+    .then(() => dispatch(fetchCampuses()))
+  }
+}
+
 export const deleteStudent = id => {
   return dispatch => {
     return axios.

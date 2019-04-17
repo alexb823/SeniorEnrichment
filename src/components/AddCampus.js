@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Button, Alert } from 'react-bootstrap';
-import { createCampus } from '../store';
+import { createCampus, updatedCampus } from '../store';
 
 class AddCampus extends Component {
-  constructor() {
-    super();
-    this.state = {
+  constructor(props) {
+    super(props);
+    this.state = this.setInitialState();
+  }
+
+  setInitialState = () => {
+    const campus = this.props.campus || {};
+    return {
       campus: {
-        name: '',
-        address: '',
-        description: '',
-        imageUrl: '',
+        name: campus.name || '',
+        address: campus.address || '',
+        description: campus.description || '',
+        imageUrl: campus.imageUrl || '',
       },
       error: '',
     };
-  }
+  };
 
   handleChange = ({ target }) => {
     const { campus } = this.state;
@@ -25,13 +30,19 @@ class AddCampus extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const { history, createCampus } = this.props;
+    const { history, createCampus, updatedCampus } = this.props;
     const { campus } = this.state;
-    createCampus(campus)
-      .then(() => history.push('/campuses'))
-      .catch(ex => {
+    if (this.props.campus) {
+      updatedCampus(this.props.campus.id, campus).catch(ex => {
         this.setState({ error: ex.response.data });
       });
+    } else {
+      createCampus(campus)
+        .then(() => history.push('/campuses'))
+        .catch(ex => {
+          this.setState({ error: ex.response.data });
+        });
+    }
   };
 
   render() {
@@ -94,7 +105,7 @@ class AddCampus extends Component {
         </Form.Group>
 
         <Button variant="primary" type="submit">
-          Submit
+          {this.props.campus ? 'Update' : 'Create'}
         </Button>
       </Form>
     );
@@ -104,6 +115,7 @@ class AddCampus extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     createCampus: campus => dispatch(createCampus(campus)),
+    updatedCampus: (id, campus) => dispatch(updatedCampus(id, campus)),
   };
 };
 

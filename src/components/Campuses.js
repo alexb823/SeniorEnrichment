@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -29,13 +28,13 @@ const Campuses = ({ campuses }) => {
                 className="main-image m-1"
                 style={{ backgroundImage: `url(${campus.imageUrl})` }}
               >
-                <Link to={`/campuses/${campus.id}`}>
+                <a href={`#/campuses/${campus.id}`}>
                   <div className="fade-in-text align-middle">
                     <h1 className="display-4 text-white text-center">
                       {campus.name}
                     </h1>
                   </div>
-                </Link>
+                </a>
               </div>
             </Col>
           ))}

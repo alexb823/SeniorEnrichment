@@ -7,33 +7,28 @@ import {
   faCode,
 } from '@fortawesome/free-solid-svg-icons';
 
-const Navigation = ({ location }) => {
-  const pathStarts = location.pathname.split('/')[1];
+const Navigation = () => {
   return (
     <Navbar bg="dark" variant="dark" className="mb-4" expand="md">
       <Container>
-        <Navbar.Brand href="#/">
+        <Navbar.Brand>
           <FontAwesomeIcon icon={faCode} /> Senior Enrichment
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="main-navbar-nav" />
         <Navbar.Collapse id="main-navbar-nav">
           <Nav className="ml-auto">
-
             <Nav.Link
               href="#campuses"
-              className={`${pathStarts === 'campuses' ? 'active' : ''}`}
             >
-              Campuses <FontAwesomeIcon icon={faGlobe} />
+              Campuses <FontAwesomeIcon icon={faGlobe} className="ml-1" />
             </Nav.Link>
 
             <Nav.Link
               href="#students"
-              className={`${pathStarts === 'students' ? 'active' : ''}`}
             >
               Students
               <FontAwesomeIcon icon={faUserGraduate} className="ml-1" />
             </Nav.Link>
-
           </Nav>
         </Navbar.Collapse>
       </Container>

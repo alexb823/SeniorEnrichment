@@ -76,8 +76,10 @@ app.delete('/api/campuses/:id', (req, res, next) => {
     .catch(next);
 });
 
-app.put('/api/campus/:id', (req, res, next) => {
-
+app.put('/api/campuses/:id', (req, res, next) => {
+  Campus.findByPk(req.params.id)
+  .then(campus => campus.update(req.body))
+  .then(campus => res.send(campus))
 })
 
 //handle 404
