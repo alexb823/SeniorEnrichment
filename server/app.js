@@ -76,6 +76,10 @@ app.delete('/api/campuses/:id', (req, res, next) => {
     .catch(next);
 });
 
+app.put('/api/campus/:id', (req, res, next) => {
+
+})
+
 //handle 404
 app.use((req, res, next) => {
   const err = new Error('Not Found!');

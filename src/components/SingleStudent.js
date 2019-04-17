@@ -28,10 +28,10 @@ const SingleStudent = ({ student, campus }) => {
               <Card.Text>GPA: {student.gpa}</Card.Text>
               {campus ? (
                 <Card.Link href={`#/campuses/${campus.id}`}>
-                  {campus.name}
+                  {campus.name} Campus
                 </Card.Link>
               ) : (
-                'no campus'
+                'Student has no campus'
               )}
             </Col>
           </Row>
@@ -41,7 +41,7 @@ const SingleStudent = ({ student, campus }) => {
   }
 };
 
-//helper function for mapmapStateToProps
+//helper function for mapStateToProps
 const findStudentAndCampus = (students, campuses, studentId) => {
   const studentInfo = {};
   studentInfo.student = students.find(student => student.id === studentId);

@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const faker = require('faker');
-const path = require('path');
 
 const db = new Sequelize(process.env.DATABASE_URL, { logging: false });
 
