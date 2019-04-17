@@ -9,8 +9,8 @@ import { deleteCampus } from '../store';
 import AddCampus from './AddCampus';
 
 class SingleCampus extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       openForm: false,
     };
@@ -18,7 +18,7 @@ class SingleCampus extends Component {
 
   render() {
     const { campus, students, history, deleteCampus } = this.props;
-    let { openForm } = this.setState;
+    const { openForm } = this.state;
 
     if (!campus) {
       return 'Loading...';
@@ -36,7 +36,7 @@ class SingleCampus extends Component {
             className="jumbo-image"
             style={{ backgroundImage: `url(${campus.imageUrl})` }}
           >
-            <h1 className="display-3 text-white">{campus.name} Campus</h1>
+            <h1 className="display-4 text-white">{campus.name} Campus</h1>
             <p className="text-white lead">{description[0]}</p>
           </Jumbotron>
 
@@ -49,10 +49,7 @@ class SingleCampus extends Component {
           <Row className="my-4 px-3">
             <Button
             variant="outline-primary"
-              onClick={() => {
-                openForm = !this.state.openForm;
-                this.setState({ openForm });
-              }}
+              onClick={() => this.setState({ openForm: !openForm })}
               aria-controls="edit-campus-form"
               aria-expanded={openForm}
             >
