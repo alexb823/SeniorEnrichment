@@ -12,7 +12,7 @@ const Students = ({ students }) => {
       <Row className="my-4">
         <Button
           variant="outline-dark"
-          className="ml-auto mr-3"
+          className="ml-auto mr-3 mr-sm-0"
           href="#/students/add"
         >
           New Student <FontAwesomeIcon icon={faPlus} className="ml-1" />

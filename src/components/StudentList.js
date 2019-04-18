@@ -11,7 +11,7 @@ const StudentList = ({ students, deleteStudent }) => {
     <ListGroup className="mb-3">
       {students.map(student => (
         <Row key={student.id} className="align-items-center my-2">
-          <Col xs={11}>
+          <Col xs={12} sm={11}>
             <ListGroup.Item
               action
               href={`#/students/${student.id}`}
@@ -31,9 +31,9 @@ const StudentList = ({ students, deleteStudent }) => {
             </ListGroup.Item>
           </Col>
 
-          <Col xs={1} className="pl-0 ml-0">
+          <Col xs={12} sm={1} className="my-2">
             <Button variant="danger" onClick={() => deleteStudent(student.id)}>
-              <FontAwesomeIcon icon={faUserSlash} />
+              <FontAwesomeIcon icon={faUserSlash}/>
             </Button>
           </Col>
         </Row>
