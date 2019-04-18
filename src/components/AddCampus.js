@@ -33,15 +33,13 @@ class AddCampus extends Component {
     const { history, createCampus, updatedCampus } = this.props;
     const { campus } = this.state;
     if (this.props.campus) {
-      updatedCampus(this.props.campus.id, campus).catch(ex => {
-        this.setState({ error: ex.response.data });
-      });
+      updatedCampus(this.props.campus.id, campus)
+        .then(() => this.setState({ error: '' }))
+        .catch(ex => this.setState({ error: ex.response.data }));
     } else {
       createCampus(campus)
         .then(() => history.push('/campuses'))
-        .catch(ex => {
-          this.setState({ error: ex.response.data });
-        });
+        .catch(ex => this.setState({ error: ex.response.data }));
     }
   };
 
@@ -105,7 +103,7 @@ class AddCampus extends Component {
         </Form.Group>
 
         <Button variant="primary" type="submit">
-          {this.props.campus ? 'Update' : 'Create'}
+          {this.props.campus ? 'Update' : 'Add'}
         </Button>
       </Form>
     );

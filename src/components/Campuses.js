@@ -30,7 +30,7 @@ const Campuses = ({ campuses }) => {
               >
                 <a href={`#/campuses/${campus.id}`}>
                   <div className="fade-in-text align-middle">
-                    <h1 className="display-4 text-white text-center">
+                    <h1 className="display-4 text-white text-center text-truncate">
                       {campus.name}
                     </h1>
                   </div>

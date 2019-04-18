@@ -13,7 +13,7 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/api/campuses', (req, res, next) => {
-  Campus.findAll()
+  Campus.findAll({order: [['name']]})
     .then(campuses => res.send(campuses))
     .catch(next);
 });
@@ -24,6 +24,7 @@ app.get('/api/students', (req, res, next) => {
     .catch(next);
 });
 
+//Not using get with includes on the front end
 app.get('/api/campuses/:id', (req, res, next) => {
   Campus.findByPk(req.params.id, {
     include: [
@@ -39,6 +40,7 @@ app.get('/api/campuses/:id', (req, res, next) => {
     .catch(next);
 });
 
+//Not using get with includes on the front end
 app.get('/api/students/:id', (req, res, next) => {
   Student.findByPk(req.params.id, {
     include: [
@@ -83,7 +85,7 @@ app.put('/api/campuses/:id', (req, res, next) => {
   .catch(next)
 })
 
-app.put('/api/students/id', (req, res, next) => {
+app.put('/api/students/:id', (req, res, next) => {
   Student.findByPk(req.params.id)
   .then(student => student.update(req.body))
   .then(student => res.send(student))

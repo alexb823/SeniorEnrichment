@@ -40,7 +40,7 @@ class SingleStudent extends Component {
                     {campus.name} Campus
                   </Card.Link>
                 ) : (
-                  'Student has no campus'
+                  'Student does not have a campus'
                 )}
               </Col>
             </Row>
@@ -55,7 +55,7 @@ class SingleStudent extends Component {
             </Button>
             <Collapse in={this.state.openForm}>
               <div id="edit-student-form" className="my-4">
-                <AddStudent />
+                <AddStudent student={student} />
               </div>
             </Collapse>
           </Card.Body>
@@ -73,7 +73,6 @@ const findStudentAndCampus = (students, campuses, studentId) => {
     studentInfo.campus = campuses.find(
       campus => campus.id === studentInfo.student.campusId
     );
-    console.log(studentInfo);
   }
   return studentInfo;
 };

@@ -1,24 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Col, Button, Alert } from 'react-bootstrap';
-import { createStudent } from '../store';
+import { createStudent, updateStudent } from '../store';
 
 class AddStudent extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = this.setInitState();
+  }
+
+  setInitState = () => {
+    const student = this.props.student || {};
+    return {
       student: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        gpa: '',
-        campusId: '--None--',
-        imageUrl: '',
+        firstName: student.firstName || '',
+        lastName: student.lastName || '',
+        email: student.email || '',
+        gpa: student.gpa || '',
+        campusId: student.campusId || '--None--',
+        imageUrl: student.imageUrl || '',
       },
       campuses: this.props.campuses,
       error: '',
     };
-  }
+  };
 
   handleChange = ({ target }) => {
     const { student } = this.state;
@@ -26,22 +31,26 @@ class AddStudent extends Component {
     this.setState({ student });
   };
 
-  componentDidUpdate = (prevProps) => {
-    console.log(this.props);
-    console.log(prevProps);
-    if(this.props.campuses.length && !prevProps.campuses.length) {
-      this.setState({campuses: this.props.campuses})
+  componentDidUpdate = prevProps => {
+    if (this.props.campuses.length && !prevProps.campuses.length) {
+      this.setState({ campuses: this.props.campuses });
     }
-  }
+  };
 
   handleSubmit = event => {
     event.preventDefault();
-    const { history, createStudent } = this.props;
+    const { history, createStudent, updateStudent } = this.props;
     const { student } = this.state;
-    createStudent(student)
-      .then(() => history.push('/students'))
-      .catch(ex => this.setState({ error: ex.response.data }))
-  }
+    if (this.props.student) {
+      updateStudent(this.props.student.id, student)
+        .then(() => this.setState({error: ''}))
+        .catch(ex => this.setState({ error: ex.response.data }));
+    } else {
+      createStudent(student)
+        .then(() => history.push('/students'))
+        .catch(ex => this.setState({ error: ex.response.data }));
+    }
+  };
 
   render() {
     const {
@@ -59,11 +68,14 @@ class AddStudent extends Component {
 
     return (
       <Form onSubmit={handleSubmit}>
-      {error && (
-      <Alert variant="danger">
-      <Alert.Heading>Please correct the form</Alert.Heading>
-      {error.split(',').map(err => <p key={err}>{err}</p>)}
-      </Alert>)}
+        {error && (
+          <Alert variant="danger">
+            <Alert.Heading>Please correct the form</Alert.Heading>
+            {error.split(',').map(err => (
+              <p key={err}>{err}</p>
+            ))}
+          </Alert>
+        )}
 
         <Form.Row>
           <Form.Group as={Col}>
@@ -129,14 +141,18 @@ class AddStudent extends Component {
               value={campusId}
               onChange={handleChange}
             >
-              <option value='--None--'>--None--</option>
-              {campuses.map(campus => <option key={campus.id} value={campus.id}>{campus.name}</option>)}
+              <option value="--None--">--None--</option>
+              {campuses.map(campus => (
+                <option key={campus.id} value={campus.id}>
+                  {campus.name}
+                </option>
+              ))}
             </Form.Control>
           </Form.Group>
         </Form.Row>
 
         <Button variant="primary" type="submit">
-          Submit
+          {this.props.student ? 'Updated' : 'Add'}
         </Button>
       </Form>
     );
@@ -152,6 +168,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     createStudent: student => dispatch(createStudent(student)),
+    updateStudent: (id, student) =>
+      dispatch(updateStudent(id, student)),
   };
 };
 
