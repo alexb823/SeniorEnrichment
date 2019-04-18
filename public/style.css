@@ -1,6 +1,7 @@
 body {
-  min-width: 375px;
+  min-width: 320px;
 }
+
 .main-image,
 .jumbo-image {
   height: 40vh;

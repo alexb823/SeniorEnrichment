@@ -11,22 +11,27 @@ const StudentList = ({ students, deleteStudent }) => {
     <ListGroup className="mb-3">
       {students.map(student => (
         <Row key={student.id} className="align-items-center my-2">
-          <Col xs={10} lg={11}>
-            <ListGroup.Item action href={`#/students/${student.id}`}>
-              <Image
-                src={student.imageUrl}
-                roundedCircle
-                className="avatar-small mr-3"
-              />
-
-              <span>
-                {student.lastName} {student.firstName}
-              </span>
-              <span className="float-right mt-2">ID: {student.id}</span>
+          <Col xs={11}>
+            <ListGroup.Item
+              action
+              href={`#/students/${student.id}`}
+              className="d-flex justify-content-between align-items-center"
+            >
+              <div>
+                <Image
+                  src={student.imageUrl}
+                  roundedCircle
+                  className="avatar-small mr-2"
+                />
+                <span>
+                  {student.lastName} {student.firstName}
+                </span>
+              </div>
+              <div>ID: {student.id}</div>
             </ListGroup.Item>
           </Col>
 
-          <Col xs={2} lg={1}>
+          <Col xs={1} className="pl-0 ml-0">
             <Button variant="danger" onClick={() => deleteStudent(student.id)}>
               <FontAwesomeIcon icon={faUserSlash} />
             </Button>
