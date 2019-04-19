@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -17,17 +18,14 @@ const Navigation = () => {
         <Navbar.Toggle aria-controls="main-navbar-nav" />
         <Navbar.Collapse id="main-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link
-              href="#campuses"
-            >
-              Campuses <FontAwesomeIcon icon={faGlobe} className="ml-1" />
+            <Nav.Link as={NavLink} to="/campuses">
+              <FontAwesomeIcon icon={faGlobe} className="mr-1" />
+              Campuses
             </Nav.Link>
 
-            <Nav.Link
-              href="#students"
-            >
+            <Nav.Link as={NavLink} to="/students">
+              <FontAwesomeIcon icon={faUserGraduate} className="mr-2" />
               Students
-              <FontAwesomeIcon icon={faUserGraduate} className="ml-1" />
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

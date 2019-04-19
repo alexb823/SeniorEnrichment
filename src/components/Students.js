@@ -1,26 +1,29 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import StudentList from './StudentList';
-import { Row, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const Students = ({ students }) => {
   return (
-    <Fragment>
+    <Container>
       <Row className="my-4">
         <Button
           variant="outline-dark"
-          className="ml-auto mr-3 mr-sm-0"
+          className="ml-auto"
           href="#/students/add"
         >
           New Student <FontAwesomeIcon icon={faPlus} className="ml-1" />
         </Button>
       </Row>
-
-      <StudentList students={students} />
-    </Fragment>
+      <Row>
+        <Col style={{ padding: '0' }}>
+          <StudentList students={students} />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

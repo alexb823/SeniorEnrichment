@@ -10,7 +10,7 @@ const StudentList = ({ students, deleteStudent }) => {
   return (
     <ListGroup className="mb-3">
       {students.map(student => (
-        <Row key={student.id} className="align-items-center my-2">
+        <Row key={student.id} className="align-items-center my-2" >
           <Col xs={12} sm={11}>
             <ListGroup.Item
               action
