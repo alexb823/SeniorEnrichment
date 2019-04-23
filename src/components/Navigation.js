@@ -12,7 +12,7 @@ const Navigation = () => {
   return (
     <Navbar bg="dark" variant="dark" className="mb-4" expand="md">
       <Container>
-        <Navbar.Brand>
+        <Navbar.Brand as={NavLink} to="/">
           <FontAwesomeIcon icon={faCode} /> Senior Enrichment
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="main-navbar-nav" />

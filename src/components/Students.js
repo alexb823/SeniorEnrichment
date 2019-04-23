@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { LinkContainer } from 'react-router-bootstrap';
 import StudentList from './StudentList';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,13 +11,11 @@ const Students = ({ students }) => {
   return (
     <Container>
       <Row className="my-4">
-        <Button
-          variant="outline-dark"
-          className="ml-auto"
-          href="#/students/add"
-        >
-          New Student <FontAwesomeIcon icon={faPlus} className="ml-1" />
-        </Button>
+        <LinkContainer to="/students/add">
+          <Button variant="outline-dark" className="ml-auto">
+            New Student <FontAwesomeIcon icon={faPlus} className="ml-1" />
+          </Button>
+        </LinkContainer>
       </Row>
       <Row>
         <Col style={{ padding: '0' }}>

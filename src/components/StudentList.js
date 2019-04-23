@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { ListGroup, Image, Button, Row, Col } from 'react-bootstrap';
 import { deleteStudent } from '../store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,11 +11,12 @@ const StudentList = ({ students, deleteStudent }) => {
   return (
     <ListGroup className="mb-3">
       {students.map(student => (
-        <Row key={student.id} className="align-items-center my-2" >
+        <Row key={student.id} className="align-items-center my-2">
           <Col xs={12} sm={11}>
             <ListGroup.Item
+              as={Link}
               action
-              href={`#/students/${student.id}`}
+              to={`/students/${student.id}`}
               className="d-flex justify-content-between align-items-center"
             >
               <div>
@@ -33,7 +35,7 @@ const StudentList = ({ students, deleteStudent }) => {
 
           <Col xs={12} sm={1} className="my-2">
             <Button variant="danger" onClick={() => deleteStudent(student.id)}>
-              <FontAwesomeIcon icon={faUserSlash}/>
+              <FontAwesomeIcon icon={faUserSlash} />
             </Button>
           </Col>
         </Row>

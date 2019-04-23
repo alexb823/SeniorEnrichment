@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {Link} from "react-router-dom";
 import { Image, Card, Row, Col, Button, Collapse } from 'react-bootstrap';
 import AddStudent from './AddStudent';
 
@@ -36,7 +37,7 @@ class SingleStudent extends Component {
                 <Card.Text>{student.email}</Card.Text>
                 <Card.Text>GPA: {student.gpa}</Card.Text>
                 {campus ? (
-                  <Card.Link href={`#/campuses/${campus.id}`}>
+                  <Card.Link as={Link} to={`/campuses/${campus.id}`}>
                     {campus.name} Campus
                   </Card.Link>
                 ) : (
